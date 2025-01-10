@@ -23,15 +23,17 @@
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
+                    <!-- Form untuk input tahun ajaran -->
                     <div class="card card-primary">
                         <div class="card-header">
                             <h3 class="card-title">Input Tahun Ajaran</h3>
                         </div>
-                        <form id="tahunAjaranForm">
+                        <form action="{{ route('tahun-ajaran.store') }}" method="POST" id="tahunAjaranForm">
+                            @csrf
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="tahunAjaran">Tahun Ajaran</label>
-                                    <input type="text" class="form-control" id="tahunAjaran" placeholder="Masukkan Tahun Ajaran (contoh: 2025/2026)">
+                                    <input type="text" class="form-control" name="tahunAjaran" id="tahunAjaran" placeholder="Masukkan Tahun Ajaran (contoh: 2025/2026)" required>
                                 </div>
                             </div>
                             <div class="card-footer">
@@ -40,6 +42,7 @@
                         </form>
                     </div>
 
+                    <!-- Daftar Tahun Ajaran -->
                     <div class="card card-secondary">
                         <div class="card-header">
                             <h3 class="card-title">Daftar Tahun Ajaran</h3>
@@ -53,12 +56,21 @@
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
-                                <tbody id="tahunAjaranTable">
-                                    <!-- Data akan ditambahkan melalui JavaScript -->
+                                <tbody>
+                                    @foreach ($tahunAjaranList as $index => $tahunAjaran)
+                                    <tr>
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ $tahunAjaran->tahun_ajaran }}</td>
+                                        <td>
+                                            <!-- Aksi seperti edit atau hapus dapat ditambahkan di sini -->
+                                            <button class="btn btn-danger btn-sm">Hapus</button>
+                                        </td>
+                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </section>
-        @endsection
+@endsection
