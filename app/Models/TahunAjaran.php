@@ -1,4 +1,4 @@
-// app/Models/TahunAjaran.php
+<?php
 
 namespace App\Models;
 
@@ -9,4 +9,5 @@ class TahunAjaran extends Model
     protected $table = 'data_tahun_ajaran';
     protected $fillable = ['tahun_ajaran', 'status', 'tgl_tambah'];
     public $timestamps = false; // Jika Anda ingin menggunakan current_timestamp()
+ //
 }
