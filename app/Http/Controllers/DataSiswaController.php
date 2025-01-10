@@ -14,6 +14,27 @@ class DataSiswaController extends Controller
         return view('data_siswa.create');
     }
 
+    public function index(Request $request)
+    {
+        $query = DataSiswa::query();
+
+        // Implementasi pencarian berdasarkan NIS
+        if ($request->has('searchNIS') && $request->searchNIS != '') {
+            $query->where('nis', 'like', '%' . $request->searchNIS . '%');
+        }
+
+        // Implementasi pencarian berdasarkan Kelas
+        if ($request->has('searchKelas') && $request->searchKelas != '') {
+            $query->where('nama_kelas', 'like', '%' . $request->searchKelas . '%');
+        }
+
+        // Ambil data siswa yang sesuai dengan pencarian
+        $dataSiswa = $query->get();
+
+        // Kirim data siswa ke view
+        return view('data_siswa.index', compact('dataSiswa'));
+    }
+
     // Menyimpan data siswa ke database
     public function store(Request $request)
     {
