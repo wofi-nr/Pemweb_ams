@@ -11,7 +11,6 @@ Route::get('/', function () {
 // Route Kelas
 Route::get('/input-kelas', [KelasController::class, 'index'])->name('input_kelas'); // Halaman Input Kelas
 Route::get('/view-kelas', [KelasController::class, 'view'])->name('view_kelas'); // Halaman View Data Kelas
-Route::get('/edit-data-kelas/{id}', [KelasController::class, 'edit'])->name('edit_data_kelas'); // Halaman Edit Data Kelas
 Route::post('/kelas/store', [KelasController::class, 'store'])->name('kelas.store'); // Proses Simpan Data Kelas
 
 // Route Siswa
