@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PembayaranController;
 
 // Route Halaman Dashboard
 Route::get('/', function () {
@@ -37,10 +38,8 @@ Route::get('/edit-data-siswa', function () {
     return view('edit_data_siswa');
 })->name('edit_data_siswa');
 
-// Route Halaman Pembayaran SPP
-Route::get('/pembayaran-spp', function () {
-    return view('pembayaran_spp');
-})->name('pembayaran_spp');
+Route::get('/pembayaran-spp', [PembayaranController::class, 'index'])->name('pembayaran_spp');
+Route::post('/pembayaran-spp', [PembayaranController::class, 'store'])->name('pembayaran.store');
 
 // Route Halaman View Data Pembayaran
 Route::get('/view-data-spp', function () {

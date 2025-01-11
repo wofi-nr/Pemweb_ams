@@ -12,7 +12,7 @@ class PembayaranController extends Controller
         // Mendapatkan semua data pembayaran untuk riwayat
         $pembayaran = Pembayaran::all();
 
-        return view('pembayaran.index', compact('pembayaran'));
+        return view('pembayaran_spp', compact('pembayaran'));
     }
 
     public function store(Request $request)
