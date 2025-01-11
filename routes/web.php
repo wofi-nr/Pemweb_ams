@@ -9,19 +9,9 @@ Route::get('/', function () {
 })->name('dashboard');
 
 // Route Kelas
-Route::get('/input-kelas', function () {
-    return view('input_kelas');
-})->name('input_kelas'); // Halaman Input Siswa
-
-// Route Kelas
 Route::get('/input-kelas', [KelasController::class, 'index'])->name('input_kelas'); // Halaman Input Kelas
 Route::get('/view-kelas', [KelasController::class, 'view'])->name('view_kelas'); // Halaman View Data Kelas
 Route::post('/kelas/store', [KelasController::class, 'store'])->name('kelas.store'); // Proses Simpan Data Kelas
-
-// Route Kelas
-Route::get('/input-kelas', function () {
-    return view('input_kelas');
-})->name('input_kelas'); // Halaman Input Siswa
 
 // Route Siswa
 Route::get('/input-siswa', function () {

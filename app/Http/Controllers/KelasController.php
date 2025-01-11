@@ -9,18 +9,20 @@ class KelasController extends Controller
 {
     public function index()
     {
-        $kelas = Kelas::all();
-        return view('kelas.input_kelas', compact('kelas'));
+        $kelas = Kelas::all(); // Mengambil semua data kelas
+        return view('input_kelas', compact('kelas'));
     }
 
     public function store(Request $request)
     {
+        // Validasi data
         $request->validate([
             'nama_kelas' => 'required|unique:data_kelas,nama_kelas|max:20',
             'wali_kelas' => 'required|max:100',
             'biaya_spp'  => 'required|numeric|min:0',
         ]);
 
+        // Menyimpan data kelas
         Kelas::create([
             'nama_kelas' => $request->nama_kelas,
             'wali_kelas' => $request->wali_kelas,
@@ -28,13 +30,7 @@ class KelasController extends Controller
             'tgl_tambah' => now(),
         ]);
 
-        return redirect()->back()->with('success', 'Data kelas berhasil ditambahkan.');
+        // Redirect ke halaman input kelas dengan pesan sukses
+        return redirect()->route('input_kelas')->with('success', 'Data kelas berhasil ditambahkan.');
     }
-
-    public function view()
-        {
-            $kelas = Kelas::withCount('siswa')->get();
-            return view('kelas.view_kelas', compact('kelas'));
-        }
-
 }
