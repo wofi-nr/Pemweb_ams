@@ -1,13 +1,22 @@
 <?php
 
+use App\Http\Controllers\Autentikasi\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataSiswaController;
 use App\Http\Controllers\KelasController;
 
-// Dashboard
-Route::get('/', function () {
-    return view('dashboard');
-})->name('dashboard');
+// Route nggo logine
+Route::get('/auth', [AuthController::class, 'login'])->name('auth');            // Halaman login
+Route::get('/logout', [AuthController::class, 'getMetu'])->name('get-metu');  // Validasi logout
+Route::post('/login', [AuthController::class, 'getMlebu'])->name('get-login');  // Validasi login
+
+Route::group(['middleware' => 'wis_login_urung_kie_nek_urung_ya_aja_akses_sing_routing_nang_jero_kene'], function () {
+    // Route Dashboard
+    Route::get('/', function () { return view('dashboard'); })->name('dashboard');
+    // Route Siswa
+    Route::get('/input-siswa', [DataSiswaController::class, 'index'])->name('input_siswa');
+    Route::post('/data-siswa/store', [DataSiswaController::class, 'store'])->name('data_siswa.store');
+});
 
 // Route Kelas
 Route::get('/input-kelas', [KelasController::class, 'index'])->name('input_kelas'); // Halaman Input Kelas

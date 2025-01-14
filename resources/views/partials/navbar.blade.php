@@ -6,7 +6,7 @@
     </ul>
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            <a class="nav-link" href="{{ route('get-metu') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
         </li>
     </ul>
 </nav>
