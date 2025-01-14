@@ -9,8 +9,19 @@ class KelasController extends Controller
 {
     public function index()
     {
+        $data = [
+            'menu'      => 'kelas',
+            'submenu'   => 'inputkelas',
+            'kelas'     => Kelas::all(),
+        ];
         $kelas = Kelas::all(); // Mengambil semua data kelas
-        return view('input_kelas', compact('kelas'));
+        return view('input_kelas', compact('data'));
+    }
+
+    public function view()
+    {
+        $kelas = Kelas::all(); // Mengambil semua data kelas
+        return view('view_kelas', compact('kelas'));
     }
 
     public function store(Request $request)
@@ -18,7 +29,7 @@ class KelasController extends Controller
         // Validasi data
         $request->validate([
             'nama_kelas' => 'required|unique:data_kelas,nama_kelas|max:20',
-            'wali_kelas' => 'required|max:100',
+            'wali_kelas' => 'required|max:50',
             'biaya_spp'  => 'required|numeric|min:0',
         ]);
 

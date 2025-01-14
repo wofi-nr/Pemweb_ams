@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DataSiswaController;
 use App\Http\Controllers\KelasController;
 
 // Dashboard
@@ -14,17 +15,8 @@ Route::get('/view-kelas', [KelasController::class, 'view'])->name('view_kelas');
 Route::post('/kelas/store', [KelasController::class, 'store'])->name('kelas.store'); // Proses Simpan Data Kelas
 
 // Route Siswa
-Route::get('/input-siswa', function () {
-    return view('input_siswa');
-})->name('input_siswa'); // Halaman Input Siswa
-
-Route::get('/view-data-siswa', function () {
-    return view('view_data_siswa');
-})->name('view_data_siswa'); // Halaman View Data Siswa
-
-Route::get('/edit-data-siswa/{id}', function ($id) {
-    return view('edit_data_siswa', ['id' => $id]);
-})->name('edit_data_siswa'); // Halaman Edit Data Siswa
+Route::get('/input-siswa', [DataSiswaController::class, 'index'])->name('input_siswa');
+Route::post('/data-siswa/store', [DataSiswaController::class, 'store'])->name('data_siswa.store');
 
 // Route Pembayaran SPP
 Route::get('/pembayaran-spp', function () {

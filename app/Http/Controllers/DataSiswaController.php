@@ -4,63 +4,55 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DataSiswa;
+use App\Models\Kelas; // Pastikan model DataKelas digunakan
 use Illuminate\Support\Facades\Hash;
 
 class DataSiswaController extends Controller
 {
-    // Menampilkan form input data siswa
-    public function create()
+    // Menampilkan halaman input data siswa
+    public function index()
     {
-        return view('data_siswa.create');
+        // Mengambil data kelas yang ada di database
+        $kelas = Kelas::all(); // Mengambil semua data kelas
+
+        // Kirim data_kelas ke view input_siswa
+        return view('input_siswa', compact('kelas'));
     }
 
-    public function index(Request $request)
+    // Menampilkan halaman untuk melihat data siswa
+    public function view()
     {
-        $query = DataSiswa::query();
-
-        // Implementasi pencarian berdasarkan NIS
-        if ($request->has('searchNIS') && $request->searchNIS != '') {
-            $query->where('nis', 'like', '%' . $request->searchNIS . '%');
-        }
-
-        // Implementasi pencarian berdasarkan Kelas
-        if ($request->has('searchKelas') && $request->searchKelas != '') {
-            $query->where('nama_kelas', 'like', '%' . $request->searchKelas . '%');
-        }
-
-        // Ambil data siswa yang sesuai dengan pencarian
-        $dataSiswa = $query->get();
-
-        // Kirim data siswa ke view
-        return view('data_siswa.index', compact('dataSiswa'));
+        $siswa = DataSiswa::all(); // Mengambil semua data siswa
+        return view('view_siswa', compact('siswa'));
     }
 
     // Menyimpan data siswa ke database
     public function store(Request $request)
     {
-        // Validasi input
-        $validated = $request->validate([
-            'nis' => 'required|max:50',
-            'username' => 'required|max:50',
-            'password' => 'required|min:6',
+        // Validasi data
+        $request->validate([
+            'nis'        => 'required|max:50',
+            'username'   => 'required|max:50',
+            'password'   => 'required|min:6',
             'nama_kelas' => 'required|max:20',
-            'nama' => 'required|max:50',
-            'alamat' => 'required|max:199',
-            'tgl_lahir' => 'required|date',
+            'nama'       => 'required|max:50',
+            'alamat'     => 'required|max:199',
+            'tgl_lahir'  => 'required|date',
         ]);
 
-        // Membuat siswa baru
-        $siswa = DataSiswa::create([
-            'nis' => $validated['nis'],
-            'username' => $validated['username'],
-            'password' => Hash::make($validated['password']), // Enkripsi password
-            'nama_kelas' => $validated['nama_kelas'],
-            'nama' => $validated['nama'],
-            'alamat' => $validated['alamat'],
-            'tgl_lahir' => $validated['tgl_lahir'],
+        // Menyimpan data siswa
+        DataSiswa::create([
+            'nis'        => $request->nis,
+            'username'   => $request->username,
+            'password'   => Hash::make($request->password), // Enkripsi password
+            'nama_kelas' => $request->nama_kelas,
+            'nama'       => $request->nama,
+            'alamat'     => $request->alamat,
+            'tgl_lahir'  => $request->tgl_lahir,
+            'tgl_tambah' => now(),
         ]);
 
-        // Redirect atau response setelah sukses
-        return redirect()->route('data_siswa.create')->with('success', 'Data Siswa berhasil disimpan');
+        // Redirect ke halaman input siswa dengan pesan sukses
+        return redirect()->route('input_siswa')->with('success', 'Data siswa berhasil ditambahkan.');
     }
 }

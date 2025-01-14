@@ -9,7 +9,6 @@ class DataSiswa extends Model
 {
     use HasFactory;
 
-    // Tentukan nama tabel jika tidak menggunakan nama tabel konvensional
     protected $table = 'data_siswa';
 
     // Tentukan kolom yang dapat diisi (fillable)
@@ -22,6 +21,9 @@ class DataSiswa extends Model
         'alamat',
         'tgl_lahir',
     ];
+
+    // Menonaktifkan penggunaan created_at dan updated_at
+    public $timestamps = false;
 
     // Tentukan kolom yang tidak dapat diisi (optional)
     protected $guarded = ['id_siswa'];

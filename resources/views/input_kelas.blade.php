@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Input Data Kelas</h1>
+                    <h1 class="m-0">Input Data</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -83,7 +83,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($kelas as $key => $kls)
+                            @forelse($data['kelas'] as $key => $kls)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $kls->nama_kelas }}</td>

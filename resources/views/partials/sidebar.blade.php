@@ -22,13 +22,13 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                            <a href="{{ route('input_kelas') }}" class="nav-link {{ request()->is('input-kelas') ? 'active' : '' }}">
+                            <a href="{{ route('input_kelas') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Input Kelas</p>
                             </a>
                             </li>
                             <li class="nav-item">
-                            <a href="{{ route('view_kelas') }}" class="nav-link {{ request()->is('view-kelas') ? 'active' : '' }}">
+                            <a href="{{ route('view_kelas') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>View Data Kelas</p>
                             </a>
@@ -45,18 +45,19 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                            <a href="{{ route('input_siswa') }}" class="nav-link {{ request()->is('input_siswa') ? 'active' : '' }}">
+                                <a href="{{ route('input_siswa') }}" class="nav-link ">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Input Siswa</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                            <a href="{{ route('view_data_siswa') }}" class="nav-link {{ request()->is('view_data_siswa') ? 'active' : '' }}">
+                                <a href="#" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>View Data Siswa</p>
                                 </a>
                             </li>
-                        </ul>
+                        </ul> 
+
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link ">
