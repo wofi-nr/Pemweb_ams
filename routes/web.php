@@ -4,6 +4,8 @@ use App\Http\Controllers\Autentikasi\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataSiswaController;
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\TahunAjaranController;
 
 // Route nggo logine
 Route::get('/auth', [AuthController::class, 'login'])->name('auth');            // Halaman login
@@ -16,6 +18,11 @@ Route::group(['middleware' => 'wis_login_urung_kie_nek_urung_ya_aja_akses_sing_r
     // Route Siswa
     Route::get('/input-siswa', [DataSiswaController::class, 'index'])->name('input_siswa');
     Route::post('/data-siswa/store', [DataSiswaController::class, 'store'])->name('data_siswa.store');
+
+    Route::get('/setting-th-ajaran', [TahunAjaranController::class, 'index'])->name('setting_th_ajaran');
+    Route::post('/setting-th-ajaran/store', [TahunAjaranController::class, 'store'])->name('setting_th_ajaran.store');
+    Route::delete('/setting-th-ajaran/delete/{id}', [TahunAjaranController::class, 'destroy'])->name('setting_th_ajaran.delete');
+
 });
 
 // Route Kelas
@@ -28,19 +35,10 @@ Route::get('/input-siswa', [DataSiswaController::class, 'index'])->name('input_s
 Route::post('/data-siswa/store', [DataSiswaController::class, 'store'])->name('data_siswa.store');
 
 // Route Pembayaran SPP
-Route::get('/pembayaran-spp', function () {
-    return view('pembayaran_spp');
-})->name('pembayaran_spp'); // Halaman Pembayaran SPP
-
-Route::get('/view-data-spp', function () {
-    return view('view_data_spp');
-})->name('view_data_spp'); // Halaman View Data Pembayaran
+Route::get('/pembayaran-spp', [PembayaranController::class, 'index'])->name('pembayaran_spp');
+Route::post('/pembayaran/store', [PembayaranController::class, 'store'])->name('pembayaran_spp.store');
 
 // Route Setting
 Route::get('/setting-app', function () {
     return view('setting_app');
 })->name('setting_app'); // Halaman Setting Aplikasi
-
-Route::get('/setting-th-ajaran', function () {
-    return view('setting_th_ajaran');
-})->name('setting_th_ajaran'); // Halaman Setting Tahun Ajaran

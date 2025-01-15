@@ -28,7 +28,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Input Tahun Ajaran</h3>
                         </div>
-                        <form action="{{ route('tahun-ajaran.store') }}" method="POST" id="tahunAjaranForm">
+                        <form action="{{ route('setting_th_ajaran.store') }}" method="POST">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
@@ -48,27 +48,34 @@
                             <h3 class="card-title">Daftar Tahun Ajaran</h3>
                         </div>
                         <div class="card-body">
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Tahun Ajaran</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($tahunAjaranList as $index => $tahunAjaran)
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Tahun Ajaran</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($tahunAjaranList as $index => $tahunAjaran)
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
                                         <td>{{ $tahunAjaran->tahun_ajaran }}</td>
                                         <td>
-                                            <!-- Aksi seperti edit atau hapus dapat ditambahkan di sini -->
-                                            <button class="btn btn-danger btn-sm">Hapus</button>
+                                            <form action="{{ route('setting_th_ajaran.delete', $tahunAjaran->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                            </form>
                                         </td>
                                     </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                @empty
+                                    <tr>
+                                        <td colspan="3" class="text-center">Belum ada data tahun ajaran</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
                         </div>
                     </div>
                 </div>

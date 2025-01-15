@@ -17,25 +17,20 @@
             <div class="card-header">
                 <h3 class="card-title">Form Pembayaran SPP</h3>
             </div>
-            <form action="{{ route('pembayaran.store') }}" method="POST">
+            <form action="{{ route('pembayaran_spp.store') }}" method="POST">
                 @csrf
                 <div class="card-body">
                     <!-- Input NIS -->
                     <div class="form-group">
                         <label for="nis">NIS Siswa</label>
-                        <input type="text" class="form-control" id="nis" name="nis" placeholder="Masukkan NIS Siswa"
-                            required>
+                        <input type="text" class="form-control" id="nis" name="nis" placeholder="Masukkan NIS Siswa">
                     </div>
                     <!-- Input Nama Siswa -->
                     <div class="form-group">
                         <label for="namaSiswa">Nama Siswa</label>
-                        <input type="text" class="form-control" id="namaSiswa" placeholder="Nama Siswa" disabled>
+                        <input type="text" class="form-control" id="namaSiswa" placeholder="Nama Siswa">
                     </div>
-                    <!-- Input Kelas -->
-                    <div class="form-group">
-                        <label for="kelas">Kelas</label>
-                        <input type="text" class="form-control" id="kelas" placeholder="Kelas" disabled>
-                    </div>
+                    
                     <!-- Input Bulan -->
                     <div class="form-group">
                         <label for="bulan">Bulan</label>
@@ -80,7 +75,6 @@
                             <th>No</th>
                             <th>NIS</th>
                             <th>Nama</th>
-                            <th>Kelas</th>
                             <th>Bulan</th>
                             <th>Jumlah</th>
                             <th>Tanggal</th>
@@ -91,10 +85,9 @@
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td>{{ $data->nis }}</td>
-                                <td>{{ $data->nama ?? '-' }}</td>
-                                <td>{{ $data->kelas ?? '-' }}</td>
+                                <td>{{ $data->nama ?? '-' }}</td> <!-- Ambil nama langsung dari kolom pembayaran -->
                                 <td>{{ $data->bulan }}</td>
-                                <td>{{ number_format($data->jumlah_bayar, 0, ',', '.') }}</td>
+                                <td>Rp {{ number_format($data->jumlah_bayar, 0, ',', '.') }}</td>
                                 <td>{{ \Carbon\Carbon::parse($data->tgl_bayar)->format('d-m-Y H:i') }}</td>
                             </tr>
                         @endforeach
@@ -104,5 +97,4 @@
         </div>
     </div>
 </div>
-
 @endsection

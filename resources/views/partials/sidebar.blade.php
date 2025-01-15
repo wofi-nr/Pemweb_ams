@@ -69,13 +69,13 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                            <a href="{{ route('pembayaran_spp') }}" class="nav-link {{ request()->is('pembayaran_spp') ? 'active' : '' }}">
+                            <a href="{{ route('pembayaran_spp') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Pembayaran SPP</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                            <a href="{{ route('view_data_spp') }}" class="nav-link {{ request()->is('view_data_spp') ? 'active' : '' }}">
+                            <a href="#" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>View Data Pembayaran</p>
                                 </a>
@@ -93,13 +93,13 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                            <a href="{{ route('setting_app') }}" class="nav-link {{ request()->is('setting_app') ? 'active' : '' }}">
+                            <a href="{{ route('setting_app') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Pengaturan Umum</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                            <a href="{{ route('setting_th_ajaran') }}" class="nav-link {{ request()->is('setting_th_ajaran') ? 'active' : '' }}">
+                            <a href="{{ route('setting_th_ajaran') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Pengaturan Th Ajaran</p>
                                 </a>

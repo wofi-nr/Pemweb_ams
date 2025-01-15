@@ -1,4 +1,4 @@
-// app/Http/Controllers/TahunAjaranController.php
+<?php
 
 namespace App\Http\Controllers;
 
@@ -9,8 +9,11 @@ class TahunAjaranController extends Controller
 {
     public function index()
     {
-        // Menampilkan halaman pengaturan tahun ajaran
-        return view('tahun-ajaran.index');
+        // Mengambil data tahun ajaran dari database
+        $tahunAjaranList = TahunAjaran::orderBy('id', 'desc')->get();
+
+        // Menampilkan halaman pengaturan tahun ajaran dengan data yang diambil
+        return view('setting_th_ajaran', compact('tahunAjaranList'));
     }
 
     public function store(Request $request)
@@ -21,13 +24,23 @@ class TahunAjaranController extends Controller
         ]);
 
         // Simpan data tahun ajaran baru ke database
-        $tahunAjaran = TahunAjaran::create([
+        TahunAjaran::create([
             'tahun_ajaran' => $request->tahunAjaran,
             'status' => 0, // Atur status sesuai kebutuhan
-            'tgl_tambah' => now(), // Atau gunakan current_timestamp()
+            'tgl_tambah' => now(),
         ]);
 
-        // Redirect atau berikan response sesuai kebutuhan
-        return redirect()->back()->with('success', 'Tahun ajaran berhasil ditambahkan');
+        // Redirect kembali ke halaman dengan pesan sukses
+        return redirect()->route('setting_th_ajaran')->with('success', 'Tahun ajaran berhasil ditambahkan');
     }
+
+    public function destroy($id)
+{
+    // Hapus data berdasarkan ID
+    TahunAjaran::destroy($id);
+
+    // Redirect dengan pesan sukses
+    return redirect()->route('setting_th_ajaran')->with('success', 'Tahun ajaran berhasil dihapus');
+}
+
 }
